@@ -70,9 +70,17 @@ function clear() {
 
 function contains(ele) {
     for(var i =0; i<this.dataStore.length; ++i){
-        if(this.dataStore[i] == ele) {
-            return true;
+        if(this.dataStore[i] instanceof Customer) {
+            console.log(this.dataStore[i], ele)
+            if (this.dataStore[i].name == ele.name && this.dataStore[i].movie == ele.movie) {
+                return true;
+            }
+        } else {
+            if(this.dataStore[i] == ele) {
+                return true;
+            }
         }
+        
     }
     return false;
 }
