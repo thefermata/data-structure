@@ -34,11 +34,8 @@ console.log(s.top)
 
 var poped = s.pop();
 console.log(s.dataStore)
-console.log(s.top)
-console.log(s.length())
-console.log(s.peek())
-console.log(s.top)
 
 s.clear();
+console.log(s.peek())
 s.push('D');
 console.log(s.peek())
