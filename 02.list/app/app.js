@@ -113,27 +113,76 @@ function getElement(){
 
 
 
+// 비디오  대여상점 시스템
+var movies = [
+    '1 The Shawshank Rdemption',
+    '2 The Godfather',
+    '3 The Godfather: Part 2',
+    '4 Pulp Fiction',
+    '5 The Good, the Bad and the Ugly',
+    '6 12 Angry Man',
+    '7 Schindlers List',
+];
 
-var names = new List();
-names.append('A');
-names.append('b');
-names.append('C');
-names.append('d');
-names.append('e');
-names.append('f');
-/*
-names.front();
-console.log(names.getElement())
+// 판매중인 영화 목록을 출력
+function displayList(list) {
+    for(var i=0;i<list.dataStore.length;i++) {
+        list.pos = i;
+        
+        if(list.getElement() instanceof Customer) {  // instanceof 연산자를 이용해 Customer 객체인지 확인
+            console.log(list.getElement()['movie']);
+        } else {
+            console.log(list.getElement())
+        }
+    }
+}
 
-names.next();
-console.log(names.getElement())
+// 고객 리스트를 관리하는 Customer객체, 빌린 사람 이름과 빌린 영화 이름
+function Customer(name, movie) {
+    this.name = name;
+    this.movie = movie;
+}
 
-names.next();
-names.next();
-names.prev();
-console.log(names.getElement())*/
+// 고객 리스트
+var customers = new List();
+
+// 고객 대여하는 기능, 대여가 가능하다면 영화목록에서 해당영화를 삭제하고 고객리스트로 추가한다.
+// 리스트 클래스의 contains를 활용하여 영화를 이용할 수 있는 상태인지 확인
+function checkOut(name, movie, filmList, customerList) {
+    if(filmList.contains(movie)) {
+        var c = new Customer(name, movie);
+        customerList.append(c);
+        filmList.remove(movie);
+    } else {
+        console.log('not availaber.')
+    }
+}
+
+function returnVideo(name, movie, filmList, customerList) {
+    console.log(customerList.dataStore)
+    if(customerList.contains(movie)) {
+        console.log('rerere')
+    } else {
+        console.log('not return')
+    }
+}
 
 
-// for(names.front(); names.currPos()<names.length();names.next()) {
-//     console.log(names.getElement())
-// }
+// 리스트로 관리하기
+var movieList = new List();
+for(var i=0; i<movies.length;++i) {
+ movieList.append(movies[i]);
+}
+
+console.log("available")
+displayList(movieList)
+
+checkOut('khm','2 The Godfather', movieList, customers); // 한사람이 대여해감
+
+console.log('remain available')
+displayList(movieList)
+
+returnVideo('khm','2 The Godfather', movieList, customers);
+
+console.log('return')
+displayList(movieList)
