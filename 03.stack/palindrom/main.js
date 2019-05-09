@@ -25,3 +25,26 @@ function length() {
 function clear() {
     this.top = 0;   // 스택의 전체 요소 삭제
 }
+
+
+function isPalindrome(word) {
+    var s = new Stack();
+    for(var i=0; i<word.length;++i) {
+        s.push(word[i])
+    }
+
+    var rword = '';
+    while(s.length()>0) {
+        rword += s.pop();
+    }
+
+    console.log(word, rword)
+    if(word == rword) {
+        return true;
+    } else{
+        return false;
+    }
+}
+
+console.log(isPalindrome('hello'))
+console.log(isPalindrome('racecar'))
